@@ -5,7 +5,10 @@
 def hello(friend_name):
     response = "Hello World!"
     return response
+
+print(hello("Hello World!"))
     
+
 
 
 
