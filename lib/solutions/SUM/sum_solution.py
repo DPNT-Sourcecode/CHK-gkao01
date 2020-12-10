@@ -8,3 +8,4 @@ def compute(x, y):
     else:
        return("Please provide interger only")
 
+print(compute(2,3))
