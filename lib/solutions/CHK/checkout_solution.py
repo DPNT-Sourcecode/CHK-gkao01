@@ -16,7 +16,10 @@ def checkout(skus):
 
     if type(skus) == str:
         if len(skus) == 1:
-            return checkout[skus]
+            total = price_table[skus]
+            return total
     else:
         return -1
 
+
+print(checkout(23))
