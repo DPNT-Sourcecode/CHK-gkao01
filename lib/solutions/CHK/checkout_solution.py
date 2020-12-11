@@ -53,7 +53,8 @@ def checkout(skus):
         return -1
 
 
-print(checkout("4Ab"))
+print(checkout("4A"))
+
 
 
 
