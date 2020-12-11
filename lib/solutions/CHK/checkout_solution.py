@@ -32,7 +32,7 @@ def checkout(skus):
             match  = re.match(r"([0-9])([a-z]+)",skus,re.I)
             if match:
                 item = match.group()
-                if type(price_table[item[0]]) == int:
+                if type(price_table[item[1]]) == int:
                     return int(item[0]) * price_table[item[1]]
                 else:
                     required_unit = price_table[item[1]]["required_unit_for_offer"]
@@ -49,5 +49,6 @@ def checkout(skus):
         return -1
 
 
-print(checkout("c"))
+print(checkout("4Ab"))
+
 
