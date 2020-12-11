@@ -4,22 +4,34 @@
 # skus = unicode string
 def checkout(skus):
     price_table ={
-        "A": 50,
-        "B": 30,
+        "A": {
+            "price" : 50,
+            "required_unit_for_offer" : 3,
+            "special_price" : 130 
+             },
+        "B":  {
+            "price" : 30,
+            "required_unit_for_offer" : 2,
+            "special_price" : 45 
+             },
         "C" : 20,
         "D": 15,
-        "special_offer": {
-            "3A" : 130,
-            "2B" : 45
-        }
+        
     }
-
-    if type(skus) == str:
+    skus = skus.upper()
+    if type(skus) == str and not skus.isdigit():
         if len(skus) == 1:
-            total = price_table[skus]
-            return total
+            if type(price_table[skus]) == int:
+                return price_table[skus]
+            else:
+                return price_table[skus]["price"]
+        else:
+            pass
+
+
     else:
         return -1
 
 
-print(checkout(23))
+print(checkout("c"))
+
