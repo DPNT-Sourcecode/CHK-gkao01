@@ -23,6 +23,7 @@ def checkout(skus):
     skus = skus.upper()
 
     if type(skus) == str and not skus.isdigit():
+
         if len(skus) == 1:
             if type(price_table[skus]) == int:
                 return price_table[skus]
@@ -31,8 +32,7 @@ def checkout(skus):
         else:
             match  = re.match(r"([0-9])([a-z]+)",skus,re.I)
             if match:
-                item = match.group()
-                print(item)
+                item = match.groups()
                 if len(item[1]) == 1:
                     if type(price_table[item[1]]) == int:
                         return int(item[0]) * price_table[item[1]]
@@ -54,6 +54,7 @@ def checkout(skus):
 
 
 print(checkout("4Ab"))
+
 
 
 
