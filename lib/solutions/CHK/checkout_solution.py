@@ -67,6 +67,8 @@ def checkout(skus):
                             if unit > closest_unit:
                                 extra_unit = unit % closest_unit
                                 pair_of_unit  = (unit - extra_unit) // closest_unit
+                                print("pair_of_unit",pair_of_unit)
+                                print("unit",int(price_table[products]["required_unit_for_offer"][str(closest_unit)]))
                                 total_price = pair_of_unit * int(price_table[products]["required_unit_for_offer"][str(closest_unit)]) + extra_unit * price_table[products]["price"]
                                 total_payment += total_price
                             else:
@@ -85,6 +87,7 @@ def checkout(skus):
 
 
 print(checkout("AAAA"))
+
 
 
 
