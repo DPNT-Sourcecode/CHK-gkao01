@@ -51,7 +51,7 @@ def checkout(skus):
             for product in price_table:
                 if product in order_detail:
                     no_of_unit[product] = order_detail.count(product)
-
+            print("no_of unit",no_of_unit)
             for products, unit in no_of_unit.items():
                 if price_table[products]["offer"] == True:
                     product_list = list(map(int ,price_table[product]["required_unit_for_offer"].keys()))
@@ -87,6 +87,7 @@ def checkout(skus):
 
 
 print(checkout("AAAA"))
+
 
 
 
