@@ -129,5 +129,3 @@ def checkout(skus):
 
 
 print(checkout("AADDBBE"))
-
-
