@@ -67,13 +67,13 @@ def checkout(skus):
                             if unit > closest_unit:
                                 extra_unit = unit % closest_unit
                                 pair_of_unit  = (unit - extra_unit) // closest_unit
-                                total_price = pair_of_unit * price_table[products]["required_unit_for_offer"][str(closest_unit)] + extra_unit * price_table[products]["price"]
+                                total_price = pair_of_unit * int(price_table[products]["required_unit_for_offer"][str(closest_unit)]) + extra_unit * price_table[products]["price"]
                                 total_payment += total_price
                             else:
                                 closest_unit = price_table[product_list.index(closest_unit)-1]
                                 extra_unit = unit % closest_unit
                                 pair_of_unit  = (unit - extra_unit) // closest_unit
-                                total_price = pair_of_unit * price_table[products]["required_unit_for_offer"][str(closest_unit)] + extra_unit * price_table[products]["price"]
+                                total_price = pair_of_unit * int(price_table[products]["required_unit_for_offer"][str(closest_unit)]) + extra_unit * price_table[products]["price"]
                                 total_payment += total_price
                     
                 else:
@@ -85,6 +85,7 @@ def checkout(skus):
 
 
 print(checkout("AAAA"))
+
 
 
 
