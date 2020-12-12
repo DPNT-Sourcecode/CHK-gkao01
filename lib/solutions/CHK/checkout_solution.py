@@ -9,7 +9,7 @@ def checkout(skus):
             "price" : 50,
             "offer" : True,
             "item_offer": False,
-            "required_unit_for_offer" : {"3": 130,"5":120},
+            "required_unit_for_offer" : {"3": 130,"5":200},
             
              },
         "B":  {
@@ -124,5 +124,6 @@ def payment_generater(unit,closest_unit,price_table,products,item_free):
 
 
 print(checkout("AAAA"))
+
 
 
