@@ -124,7 +124,4 @@ def payment_generater(products,unit,price_table,item_free):
         return total_price
 
 
-print(checkout("AADDBBE"))
-
-
-
+print(checkout("AAAA"))
