@@ -79,5 +79,6 @@ def checkout(skus):
         
 
 
-print(checkout("AAA"))
+print(checkout("AAAA"))
+
 
