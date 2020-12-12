@@ -8,17 +8,30 @@ def checkout(skus):
         "A": {
             "price" : 50,
             "offer" : True,
-            "required_unit_for_offer" : 3,
-            "special_price" : 130 
+            "item_offer": False,
+            "required_unit_for_offer" : {"3": 130,"5":120},
+            
              },
         "B":  {
             "price" : 30,
             "offer" : True,
+            "item_offer": False,
             "required_unit_for_offer" : 2,
-            "special_price" : 45 
+            
              },
-        "C" : {"price" : 20, "offer" : False },
-        "D": {"price" : 15, "offer" : False} 
+        "C" : {"price" : 20, "offer" : False ,"item_offer": False},
+        "D": {"price" : 15, "offer" : False,"item_offer": False},
+        "E" : {
+            "price" :40 ,
+            "offer" : False,
+            "item_offer": True,
+            "required_unit_for_offer":{
+                                        "2":{
+                                            "free_unit":1,
+                                            "free_item":"B"
+                                            }
+                                        }
+                }
     }
 
     if len(skus) <= 1:
@@ -41,13 +54,22 @@ def checkout(skus):
 
             for products, unit in no_of_unit.items():
                 if price_table[products]["offer"] == True:
-                    if price_table[products]["required_unit_for_offer"] == unit:
-                        total_payment += price_table[products]["special_price"]
+                    product_list = list(map(int ,price_table[product]["required_unit_for_offer"].keys()))
+                    product_list.sort()
+                    if unit < min(product_list):
+                        total_payment += unit * price_table[products]["price"]
                     else:
-                        extra_unit = unit % price_table[products]["required_unit_for_offer"]
-                        pair_of_unit  = (unit - extra_unit) // price_table[products]["required_unit_for_offer"]
-                        total_price = pair_of_unit * price_table[products]["special_price"] + extra_unit * price_table[products]["price"]
-                        total_payment += total_price
+                        if str(unit) in price_table[products]["required_unit_for_offer"]:
+                            total_payment +=  price_table[products]["required_unit_for_offer"][str(unit)]
+                        else:
+                            closest_unit =  min(product_list,key=lambda x: abs(x-unit))
+                            print(closest_unit)
+                            # if unit < closest_unit:
+
+                            # extra_unit = unit % price_table[products]["required_unit_for_offer"]
+                            # pair_of_unit  = (unit - extra_unit) // price_table[products]["required_unit_for_offer"]
+                            # total_price = pair_of_unit * price_table[products]["special_price"] + extra_unit * price_table[products]["price"]
+                            # total_payment += total_price
                     
                 else:
                     total_payment += (unit * price_table[products]["price"])
@@ -57,4 +79,5 @@ def checkout(skus):
         
 
 
-print(checkout(""))
+print(checkout("AAA"))
+
