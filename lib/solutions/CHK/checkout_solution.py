@@ -52,12 +52,12 @@ def checkout(skus):
             for product in price_table:
                 if product in order_detail:
                     no_of_unit[product] = order_detail.count(product)
-            print("no_of unit",no_of_unit)
+         
             for products, unit in no_of_unit.items():
                 # ccalculating price based offer
                 if price_table[products]["offer"] == True:
                     product_list = list(map(int ,price_table[products]["required_unit_for_offer"].keys()))
-                    print("product_list",product_list)
+                    
                     product_list.sort()
                     if unit < min(product_list):
                         total_payment += unit * price_table[products]["price"]
@@ -66,7 +66,7 @@ def checkout(skus):
                             total_payment +=  price_table[products]["required_unit_for_offer"][str(unit)]
                         else:
                             closest_unit =  min(product_list,key=lambda x: abs(x-unit))
-                            print(closest_unit)
+                            
                             if unit > closest_unit:
                                 total_price = payment_generater(products,unit,price_table,False)
                                 total_payment += total_price
@@ -77,25 +77,21 @@ def checkout(skus):
                     
                 else:
                     #calculating item based offer
-                    print("inside else",products)
-
-                    print("insude value",price_table[products])
                     if price_table[products]["item_offer"] == True:
                         product_list = list(map(int ,price_table[products]["required_unit_for_offer"].keys()))
-                        print("product_list",product_list)
                         product_list.sort()
                         if unit < min(product_list):
                             total_payment += unit * price_table[products]["price"]
                         else:
                             if str(unit) in price_table[products]["required_unit_for_offer"]:
-                                if "B" in no_of_unit.keys():
+                                if price_table[products]["required_unit_for_offer"][str(unit)]["free_item"] in no_of_unit.keys():
                                     total_payment += unit * price_table[products]["price"]
                                     discount_for_free_item += price_table["B"]["price"]
                                 else:
                                     total_payment += unit * price_table[products]["price"]
                             else:
-                                if "B" in no_of_unit.keys():
-                                    closest_unit = min(product_list,key=lambda x: abs(x-unit))
+                                closest_unit = min(product_list,key=lambda x: abs(x-unit))
+                                if price_table[products]["required_unit_for_offer"][str(closest_unit)]["free_item"]  in no_of_unit.keys():
                                     if  unit > closest:
                                         extra_unit = unit % closest_unit
                                         total_price = payment_generater(products,unit,price_table,True)
@@ -129,5 +125,6 @@ def payment_generater(products,unit,price_table,item_free):
 
 
 print(checkout("AADDBBE"))
+
 
 
