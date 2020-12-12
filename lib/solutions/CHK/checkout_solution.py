@@ -16,7 +16,7 @@ def checkout(skus):
             "price" : 30,
             "offer" : True,
             "item_offer": False,
-            "required_unit_for_offer" : 2,
+            "required_unit_for_offer" : {"2": 45},
             
              },
         "C" : {"price" : 20, "offer" : False ,"item_offer": False},
@@ -47,12 +47,14 @@ def checkout(skus):
             order_detail = list(skus)
             total_payment = 0
             no_of_unit = {}
+            discount_for_free_item = 0
 
             for product in price_table:
                 if product in order_detail:
                     no_of_unit[product] = order_detail.count(product)
             print("no_of unit",no_of_unit)
             for products, unit in no_of_unit.items():
+                # ccalculating price based offer
                 if price_table[products]["offer"] == True:
                     product_list = list(map(int ,price_table[products]["required_unit_for_offer"].keys()))
                     print("product_list",product_list)
@@ -80,11 +82,48 @@ def checkout(skus):
                                 total_payment += total_price
                     
                 else:
-                    total_payment += (unit * price_table[products]["price"])
-            return total_payment
+                    #calculating item based offer
+                    if price_table[products]["item_offer"] == False:
+                        product_list = list(map(int ,price_table[products]["required_unit_for_offer"].keys()))
+                        print("product_list",product_list)
+                        product_list.sort()
+                        if unit < min(product_list):
+                            total_payment += unit * price_table[products]["price"]
+                        else:
+                            if str(unit) in price_table[products]["required_unit_for_offer"]:
+                                if "B" in no_of_unit.keys():
+                                    total_payment += unit * price_table[products]["price"]
+                                    discount_for_free_item += price_table["B"]["price"]
+                                else:
+                                    total_payment += unit * price_table[products]["price"]
+                            else:
+                                if "B" in no_of_unit.keys():
+                                    closest_unit = min(product_list,key=lambda x: abs(x-unit))
+                                    if  unit > closest:
+                                        extra_unit = unit % closest_unit
+                                        pair_of_unit  = (unit - extra_unit) // closest_unit
+                                        #total_payment += pair_of_unit * int(price_table[products]["required_unit_for_offer"][str(closest_unit)]) + extra_unit * price_table[products]["price"]
+                                        total_payment += unit * price_table[products]["price"]
+                                        discount_for_free_item += pair_of_unit * price_table[products]["required_unit_for_offer"][str(closest_unit)]["free_unit"] * price_table[price_table[products]["required_unit_for_offer"][str(closest_unit)]["free_item"]]["price"]
+                                    else:
+                                        closest_unit = product_list[product_list.index(closest_unit)-1]
+                                        extra_unit = unit % closest_unit
+                                        pair_of_unit  = (unit - extra_unit) // closest_unit
+                                        #total_payment += pair_of_unit * int(price_table[products]["required_unit_for_offer"][str(closest_unit)]) + extra_unit * price_table[products]["price"]
+                                        total_payment += unit * price_table[products]["price"]
+                                        discount_for_free_item += pair_of_unit * price_table[products]["required_unit_for_offer"][str(closest_unit)]["free_unit"] * price_table[price_table[products]["required_unit_for_offer"][str(closest_unit)]["free_item"]]["price"]
+
+                                else:
+                                    total_payment += unit * price_table[products]["price"]
+
+                        
+                    else:
+                        total_payment += (unit * price_table[products]["price"])
+            return total_payment - discount_for_free_item
         else:
             return -1
         
 
 
-print(checkout("AAAA"))
+print(checkout("AADDBBE"))
+
