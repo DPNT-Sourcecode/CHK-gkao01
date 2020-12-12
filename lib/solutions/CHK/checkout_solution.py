@@ -25,7 +25,7 @@ def checkout(skus):
             "price" :40 ,
             "offer" : False,
             "item_offer": True,
-            "required_unit_for_offer":{
+            "required_unit_for_offer" : {
                                         "2":{
                                             "free_unit":1,
                                             "free_item":"B"
@@ -83,7 +83,10 @@ def checkout(skus):
                     
                 else:
                     #calculating item based offer
-                    if price_table[products]["item_offer"] == False:
+                    print("inside else",products)
+
+                    print("insude value",price_table[products])
+                    if price_table[products]["item_offer"] == True:
                         product_list = list(map(int ,price_table[products]["required_unit_for_offer"].keys()))
                         print("product_list",product_list)
                         product_list.sort()
@@ -126,4 +129,5 @@ def checkout(skus):
 
 
 print(checkout("AADDBBE"))
+
 
