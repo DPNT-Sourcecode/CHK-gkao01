@@ -5,18 +5,18 @@
 import re
 def checkout(skus):
     price_table ={
-        # "A": {
-        #     "price" : 50,
-        #     "required_unit_for_offer" : 3,
-        #     "special_price" : 130 
-        #      },
-        # "B":  {
-        #     "price" : 30,
-        #     "required_unit_for_offer" : 2,
-        #     "special_price" : 45 
-        #      },
-        # "C" : 20,
-        # "D": 15,
+        "A": {
+            "price" : 50,
+            "required_unit_for_offer" : 3,
+            "special_price" : 130 
+             },
+        "B":  {
+            "price" : 30,
+            "required_unit_for_offer" : 2,
+            "special_price" : 45 
+             },
+        "C" : 20,
+        "D": 15,
         
     }
 
@@ -25,10 +25,13 @@ def checkout(skus):
     if type(skus) == str and not skus.isdigit():
 
         if len(skus) == 1:
-            if type(price_table[skus]) == int:
-                return price_table[skus]
-            else:
-                return price_table[skus]["price"]
+            try:
+                if type(price_table[skus]) == int:
+                    return price_table[skus]
+                else:
+                    return price_table[skus]["price"]
+            except:
+                return -1
         else:
             match  = re.match(r"([0-9])([a-z]+)",skus,re.I)
             if match:
@@ -52,5 +55,4 @@ def checkout(skus):
     else:
         return -1
 
-
-print(checkout(""))
+print(checkout("A2"))
