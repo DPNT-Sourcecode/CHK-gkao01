@@ -112,7 +112,7 @@ def checkout(skus):
             return -1
         
 
-def payment_generater(products,unit,price_table,item_free):
+def payment_generater(unit,closest_unit,price_table,item_free):
     extra_unit = unit % closest_unit
     pair_of_unit  = (unit - extra_unit) // closest_unit
     if item_free:
@@ -125,3 +125,4 @@ def payment_generater(products,unit,price_table,item_free):
 
 
 print(checkout("AAAA"))
+
