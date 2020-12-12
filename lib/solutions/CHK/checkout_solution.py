@@ -88,11 +88,3 @@ def checkout(skus):
 
 
 print(checkout("AAAA"))
-
-
-
-
-
-
-
-
