@@ -108,9 +108,7 @@ def checkout(skus):
                                         discount_for_free_item += total_price[1]
 
                                 else:
-                                    total_payment += unit * price_table[products]["price"]
-
-                        
+                                    total_payment += unit * price_table[products]["price"]   
                     else:
                         total_payment += (unit * price_table[products]["price"])
             return total_payment - discount_for_free_item
@@ -131,4 +129,5 @@ def payment_generater(products,unit,price_table,item_free):
 
 
 print(checkout("AADDBBE"))
+
 
