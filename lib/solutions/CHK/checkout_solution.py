@@ -59,9 +59,9 @@ def checkout(skus):
                 try:
                     product_list = list(map(int ,price_table[products]["required_unit_for_offer"].keys()))
                     product_list.sort()
-                    print("product_list",product_list)
                 except:
                     pass
+
                 if price_table[products]["offer"] == True:
                     sum_of_offer_price  = sum(price_table[products]["required_unit_for_offer"].values())
 
@@ -69,37 +69,32 @@ def checkout(skus):
                         total_payment += unit * price_table[products]["price"]
                     elif unit in product_list:
                         total_payment += price_table[products]["required_unit_for_offer"][str(unit)]
+
                     else:
                         start_index = 0
                         offer_count = {}
                         sorted_producted_list = product_list[::-1]
+
                         for offer_item in sorted_producted_list:
                             offer_count[str(offer_item)] = 0
                         
-                        print("sorted product", sorted_producted_list)
-
+                        #comparing unit to qulify the max discount
                         while unit >= min(sorted_producted_list):
-                            print("min ",min(sorted_producted_list))
-                            if unit >= sorted_producted_list[start_index]:
+g                            if unit >= sorted_producted_list[start_index]:
                                 unit = unit - sorted_producted_list[start_index]
-                                print("unit inside 1",unit)
-                                print("offer_count.keys()",offer_count.keys())
+
                                 if str(sorted_producted_list[start_index]) in offer_count.keys():
-                                    print("str(sorted_producted_list[start_index])",str(sorted_producted_list[start_index]))
-                                    print("offer_count[str(sorted_producted_list[start_index])]",offer_count[str(sorted_producted_list[start_index])])
                                     offer_count[str(sorted_producted_list[start_index])] += 1
-                                    print("offer_count[str(sorted_producted_list[start_index])]",offer_count[str(sorted_producted_list[start_index])])
                                 
                                 if unit < sorted_producted_list[start_index]:
                                     start_index = start_index + 1
                             
                             else:
                                 unit = unit - sorted_producted_list[start_index + 1]
-
                                 if str(sorted_producted_list[start_index + 1]) in offer_count.keys():
                                     offer_count[str(sorted_producted_list[start_index +1])] += 1
 
-                        print("offer_item", offer_count)
+                        # calculating total payment based on qulified unit 
                         for required_unit , product_count in offer_count.items():
                             total_payment += product_count * price_table[products]["required_unit_for_offer"][required_unit]
 
@@ -112,20 +107,25 @@ def checkout(skus):
                 else:
                     #calculating item based offer
                     if price_table[products]["item_offer"] == True:
-                        product_list = list(map(int ,price_table[products]["required_unit_for_offer"].keys()))
-                        product_list.sort()
+                        
+                        # checking dicounnt qulifiy 
                         if unit < min(product_list):
                             total_payment += unit * price_table[products]["price"]
+
                         else:
                             if str(unit) in price_table[products]["required_unit_for_offer"]:
+
                                 if price_table[products]["required_unit_for_offer"][str(unit)]["free_item"] in no_of_unit.keys():
                                     total_payment += unit * price_table[products]["price"]
                                     discount_for_free_item += price_table[price_table[products]["required_unit_for_offer"][str(unit)]["free_item"]]["price"]
                                 else:
                                     total_payment += unit * price_table[products]["price"]
+
                             else:
                                 closest_unit = min(product_list,key=lambda x: abs(x-unit))
+
                                 if price_table[products]["required_unit_for_offer"][str(closest_unit)]["free_item"]  in no_of_unit.keys():
+
                                     if  unit > closest_unit:
                                         total_price = payment_generater(unit,closest_unit,price_table,products)
                                         total_payment += total_price[0]
@@ -144,7 +144,7 @@ def checkout(skus):
         else:
             return -1
         
-
+# calculating total payment and discount item price
 def payment_generater(unit,closest_unit,price_table,products):
     extra_unit = unit % closest_unit
     pair_of_unit  = (unit - extra_unit) // closest_unit
@@ -154,7 +154,32 @@ def payment_generater(unit,closest_unit,price_table,products):
     
 
 
-print(checkout("EEEEBB"))
+
+
+print("EEEEBBBB", checkout("EEEEBBBB"))
+print("", checkout(""))
+print("A", checkout("A"))
+print("B", checkout("B"))
+print("C", checkout("C"))
+print("D", checkout("D"))
+print("E", checkout("E"))
+print("a", checkout("a"))
+print("-", checkout("-"))
+print("ABCa", checkout("ABCa"))
+print("AxA", checkout("AxA"))
+print("AA", checkout("AA"))
+print("AAA", checkout("AAA"))
+print("AAAA", checkout("AAAA"))
+print("AAAAA", checkout("AAAAA"))
+print("EE", checkout("EE"))
+print("EEB", checkout("EEB"))
+print("EEEB", checkout("EEEB"))
+print("BBBBE", checkout("BBBBE"))
+print("ABCDEABCDE", checkout("ABCDEABCDE"))
+print("CCADDEEBBA", checkout("CCADDEEBBA"))
+print("AAAAAEEBAAABB", checkout("AAAAAEEBAAABB"))
+print("ABCDECBAABCABBAAAEEAA", checkout("ABCDECBAABCABBAAAEEAA")
+
 
 
 
