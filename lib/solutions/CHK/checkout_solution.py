@@ -121,8 +121,8 @@ def checkout(skus):
             
              },
         "W" : {"price" : 20, "offer" : False ,"item_offer": False},
-        "X" : {"price" : 10, "offer" : False ,"item_offer": False},
-        "Y" : {"price" : 90, "offer" : False ,"item_offer": False},
+        "X" : {"price" : 90, "offer" : False ,"item_offer": False},
+        "Y" : {"price" : 10, "offer" : False ,"item_offer": False},
         "Z" : {"price" : 50, "offer" : False ,"item_offer": False},
 
     }
@@ -262,6 +262,7 @@ def checkout(skus):
 
 
 print("EEEEBBBB", checkout("G"))
+
 
 
 
