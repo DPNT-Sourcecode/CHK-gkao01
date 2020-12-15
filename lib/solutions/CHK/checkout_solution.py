@@ -168,9 +168,5 @@ def checkout(skus):
 
 
 
-print("EEEEBBBB", checkout("EEEEBBBB"))
-
-
-
-
+print("EEEEBBBB", checkout("FFFF"))
 
