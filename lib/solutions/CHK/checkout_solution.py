@@ -261,6 +261,7 @@ def checkout(skus):
 
 
 
-print("EEEEBBBB", checkout("FFFF"))
+print("EEEEBBBB", checkout("G"))
+
 
 
