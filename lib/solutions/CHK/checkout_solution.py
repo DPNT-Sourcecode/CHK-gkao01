@@ -32,7 +32,7 @@ def checkout(skus):
                                             }
                                         },
             "free_item" :["B"]
-                }
+                },
         "F" : {
             "price" : 10 ,
             "offer" : False,
@@ -169,6 +169,7 @@ def checkout(skus):
 
 
 print("EEEEBBBB", checkout("EEEEBBBB"))
+
 
 
 
