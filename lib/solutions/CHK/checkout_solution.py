@@ -95,9 +95,10 @@ def checkout(skus):
                             
                             else:
                                 unit = unit - sorted_producted_list[start_index + 1]
+
                                 if str(sorted_producted_list[start_index + 1]) in offer_count.keys():
-                                    offer_count[str(sorted_producted_list[start_index +1])] + 1
-                                    
+                                    offer_count[str(sorted_producted_list[start_index +1])] += 1
+
                         print("offer_item", offer_count)
                         for required_unit , product_count in offer_count.items():
                             total_payment += product_count * price_table[products]["required_unit_for_offer"][required_unit]
@@ -156,5 +157,6 @@ def payment_generater(unit,closest_unit,price_table,products,item_free):
         return total_price
 
 
-print(checkout("AAAA"))
+print(checkout("AAAAAAAAAA"))
+
 
