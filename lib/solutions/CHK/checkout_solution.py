@@ -70,6 +70,9 @@ def checkout(skus):
                         if free_item in no_of_unit.keys():
                             start_index = 0
                             sorted_producted_list = product_list[::-1]
+
+                            for product in sorted_producted_list:
+                                offer_count[str(product)] = 0
    
                             #comparing unit to qulify the max discount
                             while unit >= min(sorted_producted_list):
@@ -176,4 +179,5 @@ print("ABCDEABCDE", checkout("ABCDEABCDE"))
 print("CCADDEEBBA", checkout("CCADDEEBBA"))
 print("AAAAAEEBAAABB", checkout("AAAAAEEBAAABB"))
 print("ABCDECBAABCABBAAAEEAA", checkout("ABCDECBAABCABBAAAEEAA"))
+
 
