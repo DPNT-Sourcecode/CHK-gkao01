@@ -77,6 +77,8 @@ def checkout(skus):
                         sorted_producted_list = product_list[::-1]
                         for offer_item in sorted_producted_list:
                             offer_count[str(offer_item)] = 0
+                        print("offer_item", offer_count)
+                        print("sorted product", sorted_producted_list)
 
                         while unit >= min(sorted_producted_list):
                             if unit > sorted_producted_list[start_index]:
@@ -145,5 +147,6 @@ def payment_generater(unit,closest_unit,price_table,products,item_free):
 
 
 print(checkout("AAAA"))
+
 
 
