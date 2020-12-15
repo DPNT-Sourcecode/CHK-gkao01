@@ -88,7 +88,7 @@ def checkout(skus):
                                     offer_count[str(sorted_producted_list[start_index])] += 1
                                 
                                 if unit < sorted_producted_list[start_index]:
-                                    start_index += 1
+                                    start_index = start_index + 1
                             
                             else:
                                 unit = unit -sorted_producted_list[start_index +1 ]
@@ -153,8 +153,3 @@ def payment_generater(unit,closest_unit,price_table,products,item_free):
 
 
 print(checkout("AAAA"))
-
-
-
-
-
