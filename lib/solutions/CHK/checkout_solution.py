@@ -65,8 +65,6 @@ def checkout(skus):
                 if price_table[products]["offer"] == True:
                     sum_of_offer_price  = sum(price_table[products]["required_unit_for_offer"].values())
 
-
-
                     if unit < min(product_list):
                         total_payment += unit * price_table[products]["price"]
                     elif unit in product_list:
@@ -81,19 +79,25 @@ def checkout(skus):
                         print("sorted product", sorted_producted_list)
 
                         while unit >= min(sorted_producted_list):
+                            print("min ",min(sorted_producted_list))
                             if unit >= sorted_producted_list[start_index]:
                                 unit = unit - sorted_producted_list[start_index]
-
+                                print("unit inside 1",unit)
+                                print("offer_count.keys()",offer_count.keys())
                                 if str(sorted_producted_list[start_index]) in offer_count.keys():
+                                    print("str(sorted_producted_list[start_index])",str(sorted_producted_list[start_index]))
+                                    print("offer_count[str(sorted_producted_list[start_index])]",offer_count[str(sorted_producted_list[start_index])])
                                     offer_count[str(sorted_producted_list[start_index])] += 1
+                                    print("offer_count[str(sorted_producted_list[start_index])]",offer_count[str(sorted_producted_list[start_index])])
                                 
                                 if unit < sorted_producted_list[start_index]:
                                     start_index = start_index + 1
                             
                             else:
-                                unit = unit -sorted_producted_list[start_index +1 ]
+                                unit = unit - sorted_producted_list[start_index + 1]
                                 if str(sorted_producted_list[start_index + 1]) in offer_count.keys():
                                     offer_count[str(sorted_producted_list[start_index +1])] + 1
+                                    
                         print("offer_item", offer_count)
                         for required_unit , product_count in offer_count.items():
                             total_payment += product_count * price_table[products]["required_unit_for_offer"][required_unit]
@@ -153,3 +157,4 @@ def payment_generater(unit,closest_unit,price_table,products,item_free):
 
 
 print(checkout("AAAA"))
+
