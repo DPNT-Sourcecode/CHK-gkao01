@@ -33,6 +33,18 @@ def checkout(skus):
                                         },
             "free_item" :["B"]
                 }
+        "F" : {
+            "price" : 10 ,
+            "offer" : False,
+            "item_offer": True,
+            "required_unit_for_offer" : {
+                                        "2":{
+                                            "free_unit":1,
+                                            "free_item":"F"
+                                            }
+                                        },
+            "free_item" :["F"]
+                }
     }
 
     if len(skus) <= 1:
@@ -157,27 +169,7 @@ def checkout(skus):
 
 
 print("EEEEBBBB", checkout("EEEEBBBB"))
-print("", checkout(""))
-print("A", checkout("A"))
-print("B", checkout("B"))
-print("C", checkout("C"))
-print("D", checkout("D"))
-print("E", checkout("E"))
-print("a", checkout("a"))
-print("-", checkout("-"))
-print("ABCa", checkout("ABCa"))
-print("AxA", checkout("AxA"))
-print("AA", checkout("AA"))
-print("AAA", checkout("AAA"))
-print("AAAA", checkout("AAAA"))
-print("AAAAA", checkout("AAAAA"))
-print("EE", checkout("EE"))
-print("EEB", checkout("EEB"))
-print("EEEB", checkout("EEEB"))
-print("BBBBE", checkout("BBBBE"))
-print("ABCDEABCDE", checkout("ABCDEABCDE"))
-print("CCADDEEBBA", checkout("CCADDEEBBA"))
-print("AAAAAEEBAAABB", checkout("AAAAAEEBAAABB"))
-print("ABCDECBAABCABBAAAEEAA", checkout("ABCDECBAABCABBAAAEEAA"))
+
+
 
 
