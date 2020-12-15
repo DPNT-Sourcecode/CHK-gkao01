@@ -145,16 +145,17 @@ def checkout(skus):
             return -1
         
 
-def payment_generater(unit,closest_unit,price_table,products,item_free):
+def payment_generater(unit,closest_unit,price_table,products):
     extra_unit = unit % closest_unit
     pair_of_unit  = (unit - extra_unit) // closest_unit
     total = unit * price_table[products]["price"]
-    discount_price += checkout(pair_of_unit * price_table[products]["unit"][str(closest_unit)]["item_free"])
+    discount_price = checkout(pair_of_unit * price_table[products]["required_unit_for_offer"][str(closest_unit)]["free_item"])
     return (total,discount_price)
     
 
 
 print(checkout("EEEEBB"))
+
 
 
 
