@@ -44,7 +44,87 @@ def checkout(skus):
                                             }
                                         },
             "free_item" :["F"]
-                }
+                },
+        "G" : {"price" : 20, "offer" : False ,"item_offer": False},
+        "H": {
+            "price" : 10,
+            "offer" : True,
+            "item_offer": False,
+            "required_unit_for_offer" : {"5": 45,"10":80},
+             },
+        "I" : {"price" : 35, "offer" : False ,"item_offer": False},
+        "J" : {"price" : 60, "offer" : False ,"item_offer": False},
+        "K":  {
+            "price" : 80,
+            "offer" : True,
+            "item_offer": False,
+            "required_unit_for_offer" : {"2": 150},
+             },
+        "L" : {"price" : 90, "offer" : False ,"item_offer": False},
+        "M" : {"price" : 15, "offer" : False ,"item_offer": False},
+        "N" : {
+            "price" : 40 ,
+            "offer" : False,
+            "item_offer": True,
+            "required_unit_for_offer" : {
+                                        "3":{
+                                            "free_unit":1,
+                                            "free_item":"M"
+                                            }
+                                        },
+            "free_item" :["M"]
+                },
+        "O" : {"price" : 10, "offer" : False ,"item_offer": False},
+        "P":  {
+            "price" : 50,
+            "offer" : True,
+            "item_offer": False,
+            "required_unit_for_offer" : {"5": 200},
+             },
+        "Q":  {
+            "price" : 30,
+            "offer" : True,
+            "item_offer": False,
+            "required_unit_for_offer" : {"3": 80},
+            },
+        "R" : {
+            "price" : 50 ,
+            "offer" : False,
+            "item_offer": True,
+            "required_unit_for_offer" : {
+                                        "3":{
+                                            "free_unit":1,
+                                            "free_item":"Q"
+                                            }
+                                        },
+            "free_item" :["Q"]
+                },
+        "S" : {"price" : 30, "offer" : False ,"item_offer": False},
+        "T" : {"price" : 20, "offer" : False ,"item_offer": False},
+        "U" : {
+            "price" : 40 ,
+            "offer" : False,
+            "item_offer": True,
+            "required_unit_for_offer" : {
+                                        "3":{
+                                            "free_unit":1,
+                                            "free_item":"U"
+                                            }
+                                        },
+            "free_item" :["U"]
+                },
+        "V": {
+            "price" : 50,
+            "offer" : True,
+            "item_offer": False,
+            "required_unit_for_offer" : {"2": 90,"3":130},
+            
+             },
+        "W" : {"price" : 20, "offer" : False ,"item_offer": False},
+        "X" : {"price" : 10, "offer" : False ,"item_offer": False},
+        "Y" : {"price" : 90, "offer" : False ,"item_offer": False},
+        "Z" : {"price" : 50, "offer" : False ,"item_offer": False},
+
     }
 
     if len(skus) <= 1:
@@ -182,4 +262,5 @@ def checkout(skus):
 
 
 print("EEEEBBBB", checkout("FFFF"))
+
 
