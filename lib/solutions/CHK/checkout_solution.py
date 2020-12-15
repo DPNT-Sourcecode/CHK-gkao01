@@ -75,6 +75,7 @@ def checkout(skus):
 
                 if price_table[products]["item_offer"]:
                     offer_count = {}
+                    same_product_free = []
                     min_required_unit =  price_table[products]["required_unit_for_offer"]
 
                     for free_item in price_table[products]["free_item"]:
@@ -91,6 +92,9 @@ def checkout(skus):
                                 if unit >= sorted_producted_list[start_index]:
                                     unit = unit - sorted_producted_list[start_index]
 
+                                    if free_item == products:
+                                        same_product_free.append(free_item)
+
                                     if str(sorted_producted_list[start_index]) in offer_count.keys():
                                         offer_count[str(sorted_producted_list[start_index])] += 1
                                     
@@ -101,8 +105,17 @@ def checkout(skus):
                                     unit = unit - sorted_producted_list[start_index + 1]
                                     if str(sorted_producted_list[start_index + 1]) in offer_count.keys():
                                         offer_count[str(sorted_producted_list[start_index +1])] += 1
+
                     for qulified_unit, pair_of_unit in offer_count.items():
-                        no_of_unit[min_required_unit[qulified_unit]["free_item"]] = no_of_unit[min_required_unit[qulified_unit]["free_item"]] - (pair_of_unit * min_required_unit[qulified_unit]["free_unit"])
+                        # apply max discount on same product 
+                        if products in same_product_free:
+                            pack_of_discount = int(qulified_unit) + min_required_unit[qulified_unit]["free_unit"]
+                            buy_pack = no_of_unit[products] // pack_of_discount
+                            buy_individual = no_of_unit[products] % pack_of_discount
+                            no_of_unit[products] = int(qulified_unit) * buy_pack + buy_individual
+                        else:
+                            #apply discount any other product (only for item_offer = True)
+                            no_of_unit[min_required_unit[qulified_unit]["free_item"]] = no_of_unit[min_required_unit[qulified_unit]["free_item"]] - (pair_of_unit * min_required_unit[qulified_unit]["free_unit"])
 
             
          
@@ -161,7 +174,7 @@ def checkout(skus):
         else:
             return -1
         
-# calculating total payment and discount item price
+
 
     
 
@@ -169,4 +182,5 @@ def checkout(skus):
 
 
 print("EEEEBBBB", checkout("FFFF"))
+
 
