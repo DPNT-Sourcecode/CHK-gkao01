@@ -179,9 +179,3 @@ print("ABCDEABCDE", checkout("ABCDEABCDE"))
 print("CCADDEEBBA", checkout("CCADDEEBBA"))
 print("AAAAAEEBAAABB", checkout("AAAAAEEBAAABB"))
 print("ABCDECBAABCABBAAAEEAA", checkout("ABCDECBAABCABBAAAEEAA"))
-
-
-
-
-
-
