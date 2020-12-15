@@ -80,7 +80,7 @@ def checkout(skus):
                         
                         #comparing unit to qulify the max discount
                         while unit >= min(sorted_producted_list):
-g                            if unit >= sorted_producted_list[start_index]:
+                            if unit >= sorted_producted_list[start_index]:
                                 unit = unit - sorted_producted_list[start_index]
 
                                 if str(sorted_producted_list[start_index]) in offer_count.keys():
@@ -178,7 +178,8 @@ print("BBBBE", checkout("BBBBE"))
 print("ABCDEABCDE", checkout("ABCDEABCDE"))
 print("CCADDEEBBA", checkout("CCADDEEBBA"))
 print("AAAAAEEBAAABB", checkout("AAAAAEEBAAABB"))
-print("ABCDECBAABCABBAAAEEAA", checkout("ABCDECBAABCABBAAAEEAA")
+print("ABCDECBAABCABBAAAEEAA", checkout("ABCDECBAABCABBAAAEEAA"))
+
 
 
 
