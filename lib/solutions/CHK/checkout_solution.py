@@ -59,15 +59,18 @@ def checkout(skus):
                 try:
                     product_list = list(map(int ,price_table[products]["required_unit_for_offer"].keys()))
                     product_list.sort()
+                    print("product_list",product_list)
                 except:
                     pass
                 if price_table[products]["offer"] == True:
-                    sum_of_offer_price  = sum(price_table[products]["required_unit_for_offer"].keys())
+                    sum_of_offer_price  = sum(price_table[products]["required_unit_for_offer"].values())
+
+
 
                     if unit < min(product_list):
                         total_payment += unit * price_table[products]["price"]
                     elif unit in product_list:
-                        total_payment += price_table[key]["required_unit_for_offer"][str(unit)]
+                        total_payment += price_table[products]["required_unit_for_offer"][str(unit)]
                     else:
                         start_index = 0
                         offer_count = {}
@@ -142,4 +145,5 @@ def payment_generater(unit,closest_unit,price_table,products,item_free):
 
 
 print(checkout("AAAA"))
+
 
