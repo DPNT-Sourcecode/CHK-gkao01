@@ -55,10 +55,10 @@ def checkout(skus):
         "I" : {"price" : 35, "offer" : False ,"item_offer": False},
         "J" : {"price" : 60, "offer" : False ,"item_offer": False},
         "K":  {
-            "price" : 80,
+            "price" : 70,
             "offer" : True,
             "item_offer": False,
-            "required_unit_for_offer" : {"2": 150},
+            "required_unit_for_offer" : {"2": 120},
              },
         "L" : {"price" : 90, "offer" : False ,"item_offer": False},
         "M" : {"price" : 15, "offer" : False ,"item_offer": False},
@@ -99,8 +99,27 @@ def checkout(skus):
                                         },
             "free_item" :["Q"]
                 },
-        "S" : {"price" : 30, "offer" : False ,"item_offer": False},
-        "T" : {"price" : 20, "offer" : False ,"item_offer": False},
+        "S" : {
+                "price" : 20, 
+                "offer" : False,
+                "item_offer": False,
+                "group_offer" : True,
+                "required_unit_for_offer" : {
+                                        "3": ["S","T","X","Y","Z"],
+                                        "discount_price" : 45
+                                        },
+                
+                },
+        "T" : {
+                "price" : 20, 
+                "offer" : False,
+                "item_offer": False,
+                "group_offer" : True,
+                "required_unit_for_offer" : {
+                                        "3": ["S","T","X","Y","Z"],
+                                        "discount_price" : 45
+                                        },
+        },
         "U" : {
             "price" : 40 ,
             "offer" : False,
@@ -121,10 +140,36 @@ def checkout(skus):
             
              },
         "W" : {"price" : 20, "offer" : False ,"item_offer": False},
-        "X" : {"price" : 90, "offer" : False ,"item_offer": False},
-        "Y" : {"price" : 10, "offer" : False ,"item_offer": False},
-        "Z" : {"price" : 50, "offer" : False ,"item_offer": False},
+        "X" : {
+                "price" : 17, 
+                "offer" : False,
+                "item_offer": False,
+                "group_offer" : True,
+                "required_unit_for_offer" : {
+                                        "3": ["S","T","X","Y","Z"],
+                                        "discount_price" : 45
+                                        },
+        },
+        "Y" : {
+                "price" : 20, 
+                "offer" : False,
+                "item_offer": False,
+                "group_offer" : True,
+                "required_unit_for_offer" : {
+                                        "3": ["S","T","X","Y","Z"],
+                                        "discount_price" : 45
+                                        },
+        },
+        "Z" : {"price" : 21, 
+                "offer" : False,
+                "item_offer": False,
+                "group_offer" : True,
+                "required_unit_for_offer" : {
+                                        "3": ["S","T","X","Y","Z"],
+                                        "discount_price" : 45
+                                        },
 
+    }
     }
 
     if len(skus) <= 1:
@@ -140,10 +185,48 @@ def checkout(skus):
             order_detail = list(skus)
             total_payment = 0
             no_of_unit = {}
+            group_offer = {}
+            group_offer_price = {}
             discount_for_free_item = 0
 
             for product in order_detail:
-                no_of_unit[product] = order_detail.count(product)
+                if price_table[product].get("group_offer") == True:
+                    group_offer[product] = order_detail.count(product)
+                    group_offer_price[str(price_table[product]["price"])] = {}
+                    group_offer_price[str(price_table[product]["price"])][product] = order_detail.count(product)
+
+                else:
+                    no_of_unit[product] = order_detail.count(product)
+            # calcute total price of group offer pair 
+            if bool(group_offer):
+                group_offer_total_unit = sum(group_offer.values())
+
+                for group_product , group_unit in group_offer.items():
+                    required_unit_group_offer = list(price_table[group_product]["required_unit_for_offer"].keys())
+
+                    if int(required_unit_group_offer[0]) > group_offer_total_unit:
+                        total_payment += price_table[group_product]["price"] * group_unit
+                    else:
+                        total_remaining_unit  = group_offer_total_unit % int(required_unit_group_offer[0]) 
+                        total_group_offer_pair = (group_offer_total_unit - total_remaining_unit) // int(required_unit_group_offer[0])
+                        total_payment += total_group_offer_pair * price_table[group_product]["required_unit_for_offer"]["discount_price"]
+                        global remaining_unit_group_offer 
+                        remaining_unit_group_offer = total_remaining_unit
+                        break
+            #calculate total group offer remaining unit price 
+            if bool(group_offer_price):
+
+                for remaing_unit_price in sorted(group_offer_price.items()):
+                    if remaining_unit_group_offer > 0:
+
+                        if remaining_unit_group_offer >= list(remaing_unit_price[1].values())[0]:
+                            remaining_unit_group_offer = remaining_unit_group_offer - list(remaing_unit_price[1].values())[0]
+                            total_payment +=  list(remaing_unit_price[1].values())[0] * int(remaing_unit_price[0])
+                        else:
+                            total_payment += remaining_unit_group_offer * int(remaing_unit_price[0])
+                            break
+
+            
 
             for products, unit in no_of_unit.items():
 
@@ -261,8 +344,5 @@ def checkout(skus):
 
 
 
-print("EEEEBBBB", checkout("G"))
-
-
-
+print("EEEEBBBB", checkout("SSSXXXZZ"))
 
