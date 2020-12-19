@@ -198,27 +198,27 @@ def checkout(skus):
                 else:
                     no_of_unit[product] = order_detail.count(product)
             
-            print(no_of_unit)
-            print(group_offer_price)
-            print(group_offer)
+        
             # calcute total price of group offer pair 
             if bool(group_offer):
                 group_offer_total_unit = sum(group_offer.values())
 
                 for group_product , group_unit in group_offer.items():
+                    global remaining_unit_group_offer 
                     required_unit_group_offer = list(price_table[group_product]["required_unit_for_offer"].keys())
 
                     if int(required_unit_group_offer[0]) > group_offer_total_unit:
                         total_payment += price_table[group_product]["price"] * group_unit
+                        remaining_unit_group_offer  = 0
                     else:
                         total_remaining_unit  = group_offer_total_unit % int(required_unit_group_offer[0]) 
                         total_group_offer_pair = (group_offer_total_unit - total_remaining_unit) // int(required_unit_group_offer[0])
                         total_payment += total_group_offer_pair * price_table[group_product]["required_unit_for_offer"]["discount_price"]
-                        global remaining_unit_group_offer 
                         remaining_unit_group_offer = total_remaining_unit
                         break
+
             #calculate total group offer remaining unit price 
-            if bool(group_offer_price):
+            if remaining_unit_group_offer > 0:
 
                 for remaing_unit_price in sorted(group_offer_price.items()):
                     if remaining_unit_group_offer > 0:
@@ -231,9 +231,7 @@ def checkout(skus):
                             break
 
             
-            print(no_of_unit)
-            print(group_offer_price)
-            print(group_offer)
+            
             for products, unit in no_of_unit.items():
 
                 try:
@@ -351,6 +349,7 @@ def checkout(skus):
 
 
 print("EEEEBBBB", checkout(""))
+
 
 
 
