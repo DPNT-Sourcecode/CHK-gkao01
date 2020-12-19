@@ -197,6 +197,10 @@ def checkout(skus):
 
                 else:
                     no_of_unit[product] = order_detail.count(product)
+            
+            print(no_of_unit)
+            print(group_offer_price)
+            print(group_offer)
             # calcute total price of group offer pair 
             if bool(group_offer):
                 group_offer_total_unit = sum(group_offer.values())
@@ -227,7 +231,9 @@ def checkout(skus):
                             break
 
             
-
+            print(no_of_unit)
+            print(group_offer_price)
+            print(group_offer)
             for products, unit in no_of_unit.items():
 
                 try:
@@ -344,5 +350,6 @@ def checkout(skus):
 
 
 
-print("EEEEBBBB", checkout("SSSXXXZZ"))
+print("EEEEBBBB", checkout("ABCDEFGHIJKLMNOPQRSTUVW"))
+
 
